@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
           href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
           rel="stylesheet"
         />
+        <link href="/styles.css" rel="stylesheet" />
       </Head>
       <Component {...pageProps} />
     </>
