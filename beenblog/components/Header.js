@@ -5,7 +5,7 @@ export default function Header() {
     <header className=" flex flex-row py-2 -mx-3 justify-between">
       <div>
         <Link href="/">
-          <a className="btn btn-link">BeenBlog</a>
+          <h1 className="fs-2 fw-bold">BeenLog</h1>
         </Link>
       </div>
       <div>
