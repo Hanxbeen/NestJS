@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,9 +27,10 @@ export default function Home() {
           </a>
         </div>
         <div>
-          <a href="/introduce" className="btn btn-link">
-            Introduce
-          </a>
+          <Link href="/introduce">
+            <a className="btn btn-link">Introduce</a>
+          </Link>
+
           <a href="#none" className="btn btn-link">
             Order
           </a>
