@@ -1,2 +1,2 @@
-# NestJS
+# NextJS
 Next.js study
