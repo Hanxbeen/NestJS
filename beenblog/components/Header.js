@@ -12,8 +12,8 @@ export default function Header() {
         <Link href="/introduce">
           <a className="btn btn-link">Introduce</a>
         </Link>
-        <Link href="/order">
-          <a className="btn btn-link">Order</a>
+        <Link href="/board">
+          <a className="btn btn-link">Board</a>
         </Link>
         <Link href="/hiring">
           <a className="btn btn-link">Hiring</a>
