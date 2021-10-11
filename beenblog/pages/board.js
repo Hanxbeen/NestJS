@@ -4,8 +4,8 @@ export default function Board() {
   return (
     <div className="container">
       <Header />
-      <h1>Board</h1>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
+      {/* <h1>Board</h1> */}
+      <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
         <div class="col">
           <div class="card">
             <img src="/img/jslogo.png" class="card-img-top" alt="..."></img>

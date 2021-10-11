@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className=" flex flex-row py-2 -mx-3 justify-between">
+    <header className=" flex flex-row py-2 -mx-3 mt-2 justify-between">
       <div>
         <Link href="/">
           <h1 className="fs-2 fw-bold">BeenLog</h1>
@@ -15,8 +15,8 @@ export default function Header() {
         <Link href="/board">
           <a className="btn btn-link">Board</a>
         </Link>
-        <Link href="/hiring">
-          <a className="btn btn-link">Hiring</a>
+        <Link href="/write">
+          <a className="btn btn-link">Write</a>
         </Link>
         <Link href="/contact">
           <a className="btn btn-link"> Contact Us</a>
