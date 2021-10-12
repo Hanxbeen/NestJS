@@ -1,58 +1,89 @@
 import Header from "../components/Header";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useState } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 export default function Write() {
+  const editorRef = useRef();
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const { CKEditor, ClassicEditor } = editorRef.current || {};
+  useEffect(() => {
+    editorRef.current = {
+      CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
+      ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
+    };
+    setEditorLoaded(true);
+  }, []);
+
   const [blogContent, setBlogContent] = useState({
     title: "",
     content: "",
   });
-  const getValue = e => {
+  const [viewContent, setViewContent] = useState([]);
+
+  const getValue = (e) => {
     const { name, value } = e.target;
-      console.log(name, value);
+    setBlogContent({
+      ...blogContent,
+      [name]: value,
+    });
+    // console.log(`${name} : ${value}`);
+    console.log(blogContent);
   };
+
   return (
     <div className="container">
       <Header />
       <form className="mt-5">
-        <input
-          type="text"
-          className="form-control"
-          id="inputTitle"
-          placeholder="Title"
-        ></input>
-        <div id="titleTag" className="form-text my-3">
-          <span class="badge bg-primary"># Primary</span>
-          <span class="badge bg-secondary"># Secondary</span>
-          <span class="badge bg-success"># Success</span>
-          <span class="badge bg-danger"># Danger</span>
-          <span class="badge bg-warning text-dark"># Warning</span>
-          <span class="badge bg-info text-dark"># Info</span>
-          <span class="badge bg-light text-dark"># Light</span>
-          <span class="badge bg-dark"># Dark</span>
+        <div className="content-viewer">
+          {viewContent.map((element) => {
+            <div>
+              <h2>{element.title}</h2>
+              <div>{element.content}</div>
+            </div>;
+          })}
         </div>
-        <CKEditor
-          editor={ClassicEditor}
-          data="<p>입력하세요</p>"
-          onReady={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor);
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            console.log({ event, editor, data });
-          }}
-          onBlur={(event, editor) => {
-            console.log("Blur.", editor);
-          }}
-          onFocus={(event, editor) => {
-            console.log("Focus.", editor);
-          }}
-        />
-        <div className="flex justify-center mt-3">
-          <button type="submit" className="btn btn-primary mt-3 w-24">
-            입력
-          </button>
+        <div className="form-wrapper">
+          <input
+            type="text"
+            name="title"
+            className="form-control"
+            id="inputTitle"
+            placeholder="Title"
+            onChange={getValue}
+          />
+          <div id="titleTag" className="form-text my-3">
+            <span className="badge bg-primary"># Primary</span>
+            <span className="badge bg-secondary"># Secondary</span>
+            <span className="badge bg-success"># Success</span>
+            <span className="badge bg-danger"># Danger</span>
+            <span className="badge bg-warning text-dark"># Warning</span>
+            <span className="badge bg-info text-dark"># Info</span>
+            <span className="badge bg-light text-dark"># Light</span>
+            <span className="badge bg-dark"># Dark</span>
+          </div>
+          {editorLoaded ? (
+            <CKEditor
+              editor={ClassicEditor}
+              data="<p>입력하세요</p>"
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                console.log({ event, editor, data });
+              }}
+            />
+          ) : (
+            <div>Editor loading</div>
+          )}
+
+          <div className="flex justify-center mt-3">
+            <button
+              type="submit"
+              className="btn btn-primary mt-3 w-24"
+              onClick={() => {
+                setBlogContent(viewContent.concat({ ...blogContent }));
+              }}
+            >
+              입력
+            </button>
+          </div>
         </div>
       </form>
     </div>
