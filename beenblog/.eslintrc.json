@@ -1,9 +1,28 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
   "extends": [
-    "next",
-    "prettier"
+    "some-other-config-you-use",
+    "prettier",
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "no-console": "off"
+  },
+  "plugins": [
+    "import",
+    "react-hooks"
   ]
 }
-/*
-"extends": "next/core-web-vitals"
-*/
