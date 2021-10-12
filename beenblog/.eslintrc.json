@@ -1,42 +1,28 @@
-// .eslintrc.json
 {
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
-  "parser": "babel-eslint",
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "airbnb",
-    "plugin:prettier/recommended"
-  ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react",
-    "react-hooks",
-    "prettier"
+    "some-other-config-you-use",
+    "prettier",
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended"
   ],
   "rules": {
-    "react/react-in-jsx-scope": 0,
-    "react/prefer-stateless-function": 0,
-    "react/jsx-filename-extension": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "no-nested-ternary": 0
+    "no-console": "off"
   },
-  "globals": {
-    "React": "writable"
-  }
+  "plugins": [
+    "import",
+    "react-hooks"
+  ]
 }
