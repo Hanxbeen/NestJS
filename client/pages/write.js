@@ -1,6 +1,6 @@
 import Header from "../components/Header";
-
 import React, { useState, useEffect, useRef } from "react";
+import Axios from "axios";
 export default function Write() {
   const editorRef = useRef();
   const [editorLoaded, setEditorLoaded] = useState(false);
@@ -19,6 +19,14 @@ export default function Write() {
   });
   const [viewContent, setViewContent] = useState([]);
 
+  const regPost = () => {
+    Axios.post("/api/insert", {
+      title: blogContent.title,
+      content: blogContent.content,
+    }).then(() => {
+      alert("게시글 등록 완료!");
+    });
+  };
   const getValue = (e) => {
     const { name, value } = e.target;
     setBlogContent({
@@ -77,9 +85,7 @@ export default function Write() {
             <button
               type="submit"
               className="btn btn-primary mt-3 w-24"
-              onClick={() => {
-                setBlogContent(viewContent.concat({ ...blogContent }));
-              }}
+              onClick={regPost}
             >
               입력
             </button>
