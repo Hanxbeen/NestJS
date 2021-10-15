@@ -75,11 +75,11 @@ export default function Write() {
               onChange={(event, editor) => {
                 const data = editor.getData();
                 console.log({ event, editor, data });
-                setMovieContent({
-                  ...movieContent,
+                setBlogContent({
+                  ...blogContent,
                   content: data,
                 });
-                console.log(movieContent);
+                console.log(blogContent);
               }}
             />
           ) : (
