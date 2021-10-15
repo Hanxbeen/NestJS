@@ -20,7 +20,7 @@ export default function Write() {
   const [viewContent, setViewContent] = useState([]);
 
   const regPost = () => {
-    Axios.post("/api/insert", {
+    Axios.post("http://localhost:8000/api/insert", {
       title: blogContent.title,
       content: blogContent.content,
     }).then(() => {
@@ -75,6 +75,11 @@ export default function Write() {
               onChange={(event, editor) => {
                 const data = editor.getData();
                 console.log({ event, editor, data });
+                setMovieContent({
+                  ...movieContent,
+                  content: data,
+                });
+                console.log(movieContent);
               }}
             />
           ) : (
@@ -83,7 +88,7 @@ export default function Write() {
 
           <div className="flex justify-center mt-3">
             <button
-              type="submit"
+              type="button"
               className="btn btn-primary mt-3 w-24"
               onClick={regPost}
             >

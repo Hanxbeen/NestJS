@@ -20,7 +20,7 @@ client.connect((err) => {
   }
 });
 
-app.get("/", function (req, res, next) {
+app.get("/api/insert", function (req, res, next) {
   const query = new Query(
     "INSERT INTO board (title, contents) VALUES ('next.js로 만든 블로그', '즐거운 개발생활')"
   );
