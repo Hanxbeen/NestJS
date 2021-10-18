@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
+
 export default function Write() {
   const editorRef = useRef();
   const [editorLoaded, setEditorLoaded] = useState(false);
@@ -15,14 +16,14 @@ export default function Write() {
 
   const [blogContent, setBlogContent] = useState({
     title: "",
-    content: "",
+    contents: "",
   });
   const [viewContent, setViewContent] = useState([]);
-
+  //http://localhost:8000/api/insert
   const regPost = () => {
-    Axios.post("http://localhost:8000/api/insert", {
+    Axios.post("http://localhost:8000/api/insert/", {
       title: blogContent.title,
-      content: blogContent.content,
+      contents: blogContent.contents,
     }).then(() => {
       alert("게시글 등록 완료!");
     });
@@ -42,12 +43,12 @@ export default function Write() {
       <Header />
       <form className="mt-5">
         <div className="content-viewer">
-          {viewContent.map((element) => {
+          {/* {viewContent.map((element) => {
             <div>
               <h2>{element.title}</h2>
-              <div>{element.content}</div>
+              <div>{element.contents}</div>
             </div>;
-          })}
+          })} */}
         </div>
         <div className="form-wrapper">
           <input
@@ -61,12 +62,10 @@ export default function Write() {
           <div id="titleTag" className="form-text my-3">
             <span className="badge bg-primary"># Primary</span>
             <span className="badge bg-secondary"># Secondary</span>
-            <span className="badge bg-success"># Success</span>
-            <span className="badge bg-danger"># Danger</span>
-            <span className="badge bg-warning text-dark"># Warning</span>
-            <span className="badge bg-info text-dark"># Info</span>
-            <span className="badge bg-light text-dark"># Light</span>
-            <span className="badge bg-dark"># Dark</span>
+
+            <span class="badge rounded-pill bg-info text-dark">Info</span>
+            <span class="badge rounded-pill bg-light text-dark">Light</span>
+            <span class="badge rounded-pill bg-dark">Dark</span>
           </div>
           {editorLoaded ? (
             <CKEditor
@@ -77,7 +76,7 @@ export default function Write() {
                 console.log({ event, editor, data });
                 setBlogContent({
                   ...blogContent,
-                  content: data,
+                  contents: data,
                 });
                 console.log(blogContent);
               }}

@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 const { Client } = require("pg");
 const Query = require("pg").Query;
+const cors = require("cors");
 
 const client = new Client({
   user: "hb",
@@ -19,11 +20,13 @@ client.connect((err) => {
     console.log("success!");
   }
 });
-
-app.get("/api/insert", function (req, res, next) {
-  const query = new Query(
-    "INSERT INTO board (title, contents) VALUES ('next.js로 만든 블로그', '즐거운 개발생활')"
-  );
+app.use(cors());
+app.post("/", function (req, res, next) {
+  const title = req.body["title"];
+  const contents = req.body["contents"];
+  const qstr = "INSERT INTO board (title, contents) values($1, $2);";
+  const query = client.query(qstr, [title, contents]);
+  console.log(title);
   client.query(query);
   var rows = [];
   /**
@@ -43,7 +46,6 @@ app.get("/api/insert", function (req, res, next) {
     console.error(err.stack);
   });
 });
-
 app.listen(PORT, () => {
   console.log(`running on PORT ${PORT}`);
 });
