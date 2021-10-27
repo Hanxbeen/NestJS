@@ -25,12 +25,36 @@ app.use(express.json());
 
 app.get("/getBoard", async (req, res) => {
   try {
-    const getBoard = await client.query("SELECT * FROM board");
-    res.json(getBoard.rows);
+    const sqlQuery = await client.query("SELECT * FROM board");
+    res.json(sqlQuery.rows);
   } catch (error) {
     console.error(error.message);
   }
 });
+
+app.post("/sendBoard", async (req, res) => {
+  try {
+    const title = req.body.title;
+    const contents = req.body.content;
+    const sqlQuery = "INSERT INTO board (title, contents) VALUES (?,?)";
+    client.query(sqlQuery, [title, contents], (err, result) => {
+      res.send("SUCCESS!");
+      console.log(result);
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+app.post("/api/insert", (req, res) => {
+  const title = req.body.title;
+  const content = req.body.content;
+  const sqlQuery = "INSERT INTO simpleboard (title, content) VALUES (?,?)";
+  db.query(sqlQuery, [title, content], (err, result) => {
+    res.send("success!");
+  });
+});
+
 // app.post("/", function (req, res, next) {
 //   const title = req.body["title"];
 //   const contents = req.body["contents"];
